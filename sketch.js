@@ -4,11 +4,18 @@ var bullets = [];
 var zombies = [];
 var score = 0;
 var zombies_spawn_counter = 10;
+var imgPowerStone;
+var x;
+
+function preload() {
+  imgPowerStone = loadImage("images/powerStone.png");
+}
 
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
   player = new Player();
   create_zombie(zombies_spawn_counter);
+  x = new PowerStone(13, 13, imgPowerStone);
 }
 
 function bullet() {
@@ -20,6 +27,12 @@ function zombie() {
   check_collision();
   respawn_zombies();
 }
+
+function powerStone() {
+  x.show();
+}
+
+function showCoolDown() {}
 
 function game_statues() {
   textSize(50);
@@ -33,6 +46,7 @@ function draw() {
   player.update();
   bullet();
   zombie();
+  powerStone();
   game_statues();
 }
 

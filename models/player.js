@@ -6,8 +6,9 @@ function Player() {
   this.img = loadImage("images/Ironman.png");
   this.width = 36;
   this.height = 60;
-
+  this.isUsingWave = false;
   this.waveRange = 0;
+  this.isWaveInCD = false;
 
   this.show = function () {
     image(
@@ -18,18 +19,25 @@ function Player() {
       this.height
     );
     this.weapon.show();
-    this.asd();
+    this.laser();
   };
 
-  this.asd = function () {
-    if (this.waveRange < windowWidth / 2) {
-      this.waveRange += 15;
-      push();
-      noFill();
-      ellipse(this.x, this.y, this.waveRange);
-      pop();
-    } else {
-      this.waveRange = 0;
+  this.laser = function () {
+    if (keyIsDown(81) && !this.isWaveInCD) {
+      this.isUsingWave = true;
+      this.isWaveInCD = true;
+    }
+    if (this.isUsingWave) {
+      if (this.waveRange < windowWidth / 2) {
+        this.waveRange += 15;
+        push();
+        noFill();
+        ellipse(this.x, this.y, this.waveRange);
+        pop();
+      } else {
+        this.isUsingWave = false;
+        this.waveRange = 0;
+      }
     }
   };
 
