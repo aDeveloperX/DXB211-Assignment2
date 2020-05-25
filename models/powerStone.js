@@ -16,9 +16,7 @@ function PowerStone(x, y, img) {
   };
 
   this.collided = function (x, y) {
-    return (
-      (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y) <
-      (this.width / 2) * (this.width / 2)
-    );
+    console.log((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
+    return (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y) < 5000;
   };
 }

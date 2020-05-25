@@ -29,7 +29,12 @@ function zombie() {
 }
 
 function powerStone() {
-  x.show();
+  if (score > 2 && !player.hasPowerStone) {
+    x.show();
+  }
+  if (x.collided(player.x, player.y)) {
+    player.hasPowerStone = true;
+  }
 }
 
 function showCoolDown() {}
@@ -51,7 +56,7 @@ function draw() {
 }
 
 function create_bullet() {
-  bullets.push(new Bullet(player.x, player.y, player.weapon.angle));
+  bullets.push(new Bullet(player.x, player.y - 10, player.weapon.angle));
 }
 
 function create_zombie(amount) {

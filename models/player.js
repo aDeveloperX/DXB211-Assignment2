@@ -8,7 +8,8 @@ function Player() {
   this.height = 60;
   this.isUsingWave = false;
   this.waveRange = 0;
-  this.isWaveInCD = false;
+  this.hasPowerStone = false;
+  this.health = 100;
 
   this.show = function () {
     image(
@@ -19,13 +20,14 @@ function Player() {
       this.height
     );
     this.weapon.show();
-    this.laser();
+    if (this.hasPowerStone) {
+      this.laser();
+    }
   };
 
   this.laser = function () {
-    if (keyIsDown(81) && !this.isWaveInCD) {
+    if (keyIsDown(81)) {
       this.isUsingWave = true;
-      this.isWaveInCD = true;
     }
     if (this.isUsingWave) {
       if (this.waveRange < windowWidth / 2) {
@@ -58,7 +60,7 @@ function Player() {
   };
 
   this.update = function () {
-    this.weapon.update(this.x, this.y);
+    this.weapon.update(this.x, this.y - 10);
     if (keyIsDown(87) && keyIsDown(68)) {
       if (!this.topOffScreen()) {
         this.y -= this.speed;
